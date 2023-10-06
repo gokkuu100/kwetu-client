@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 
 function UpdateHouse() {
@@ -6,42 +6,22 @@ function UpdateHouse() {
   const [houseId, setHouseId] = useState(id);
   const [fieldToUpdate, setFieldToUpdate] = useState("");
   const [newValue, setNewValue] = useState("");
-  const [houseData, setHouseData] = useState({
-    title: "",
-    size: 0,
-    price: 0,
-    description: "",
-    city: "",
-    county: "",
-    bedrooms: 0,
-    bathrooms: 0,
-    image_paths: [],
-  });
-
-  useEffect(() => {
-    // Fetch house details based on ID from the API endpoint
-    fetch(`http://127.0.0.1:5000/houses/${id}`) // Update the API endpoint URL
-      .then((response) => response.json())
-      .then((data) => {
-        setHouseData(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching house details:", error);
-      });
-  }, [id]);
 
   const handleUpdateField = (e) => {
     e.preventDefault();
 
     const updatedField = {
-      [fieldToUpdate]: newValue
+      [fieldToUpdate]: newValue,
     };
 
-    // Perform patch request to update a specific field in the house data
-    fetch(`http://127.0.0.1:5000/${houseId}`, {
+    // Get the token from localStorage
+    const token = localStorage.getItem("access_token");
+
+    fetch(`http://127.0.0.1:5000/houses/${houseId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(updatedField),
     })
@@ -49,7 +29,6 @@ function UpdateHouse() {
       .then((data) => {
         console.log("Field updated successfully:", data);
         alert("Field updated in the database");
-        // Optionally, update the state with the new data received from the API
       })
       .catch((error) => {
         console.error("Error updating field:", error);

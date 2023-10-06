@@ -25,7 +25,7 @@ const SignUp = ({ setAuthenticated }) => {
         // Handle successful signup
         console.log("SignUp Successful");
         // Redirect to login page
-        navigate("/login");
+        navigate("/signin");
         setAuthenticated(true);
       } else {
         console.error("SignUp failed");

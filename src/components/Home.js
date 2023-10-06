@@ -22,20 +22,6 @@ function Home() {
 
   return (
     <div className="home">
-      <nav>
-        <ul>
-          <li>
-            <Link to="/create">Create House</Link>
-          </li>
-          <li>
-            <Link to="/update">Update House</Link>
-          </li>
-          <li>
-            <Link to="/delete">Delete House</Link>
-          </li>
-          {/* Add more links to other routes if needed */}
-        </ul>
-      </nav>
       <h1>House Listings</h1>
       <div className="house-list">
         {houses.map((house) => (

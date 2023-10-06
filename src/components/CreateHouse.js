@@ -1,57 +1,58 @@
 import React, { useState } from "react";
 
 function CreateHouse() {
-  const [houseData, setHouseData] = useState({
-    title: "",
-    size: 0,
-    price: 0,
-    description: "",
-    city: "",
-    county: "",
-    bedrooms: 0,
-    bathrooms: 0,
-    image_paths: [],
-  });
+    const [houseData, setHouseData] = useState({
+        title: "",
+        size: 0,
+        price: 0,
+        description: "",
+        city: "",
+        county: "",
+        bedrooms: 0,
+        bathrooms: 0,
+        image_paths: "",
+        agent_id: 0
+    });
 
-//   const handleInputChange = (e) => {
-//     const { name, value } = e.target;
-//     setHouseData({ ...houseData, [name]: value });
-//   };
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    if (name === "image_paths") {
-      // Handle image_paths as an array, adding the new link at index 0
-      setHouseData({ ...houseData, [name]: [value, ...houseData.image_paths] });
-    } else {
-      setHouseData({ ...houseData, [name]: value });
-    }
-  };
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setHouseData({ ...houseData, [name]: value });
+    };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
-    fetch("http://127.0.0.1:5000/houses", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(houseData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("House added successfully:", data);
-        alert("House added to database");
-      })
-      .catch((error) => {
-        console.error("Error adding house:", error);
-      });
-  };
+        const token = localStorage.getItem('access_token');
 
-  return (
-    <div className="create-house">
-      <h2>Create a New House Listing</h2>
-      <form onSubmit={handleSubmit}>
-        <label>Title:</label><br />
+        if (!token) {
+            console.error("Token not found in local storage");
+            return;
+        }
+
+        fetch("http://127.0.0.1:5000/houses", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify(houseData),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("House added successfully:", data);
+                alert("House added to database");
+            })
+            .catch((error) => {
+                console.error("Error adding house:", error);
+            });
+    };
+
+    return (
+        <div className="create-house">
+            <h2>Create a New House Listing</h2>
+            <form onSubmit={handleSubmit}>
+                {/* Your input fields */}
+                <label>Title:</label><br />
         <input
         type="text"
         name="title"
@@ -119,14 +120,22 @@ function CreateHouse() {
         <input
         type="text"
         name="image_paths"
-        value={houseData.image_paths[0]}
+        value={houseData.image_paths}
         onChange={handleInputChange}
         required
         /><br />
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-  );
+        <label>Agent ID:</label><br />
+        <input
+            type="number"
+            name="agent_id"
+            value={houseData.agent_id}
+            onChange={handleInputChange}
+            required
+        /><br />
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    );
 }
 
 export default CreateHouse;
