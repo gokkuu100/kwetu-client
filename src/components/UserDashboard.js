@@ -9,7 +9,7 @@ function UserDashboard() {
 
   useEffect(() => {
     if (id) {
-      fetch(`http://127.0.0.1:5000/users/${id}`)
+      fetch(`https://housing-db-85734cb1418b.herokuapp.com/users/${id}`)
         .then((response) => response.json())
         .then((data) => {
           setUser(data);
@@ -32,16 +32,23 @@ function UserDashboard() {
   }
 
   return (
-    <div className="user-dashboard">
-      <div className="navigation-links">
-        <Link to="/home">Home</Link>
-        <Link to={`/users/${id}`}>User Dashboard</Link>
-        <button onClick={handleLogout}>Logout</button> 
-      </div>
-      <h2>User Details</h2>
-      <p>ID: {user.id}</p>
-      <p>Email: {user.email}</p>
+<div className="user-dashboard bg-gray-100 min-h-screen flex flex-col">
+  <div className="bg-blue-500 text-white py-2 text-center">
+    <div className="container mx-auto flex justify-between items-center">
+      <Link to="/home" className="hover:underline">Home</Link>
+      <Link to={`/users/${id}`} className="hover:underline">User Dashboard</Link>
+      <button onClick={handleLogout} className="hover:underline">Logout</button>
     </div>
+  </div>
+  <div className="flex flex-col items-center justify-center flex-1 p-8">
+    <div className="bg-white p-8 rounded shadow-md w-96 mb-4">
+      <h2 className="text-2xl font-semibold mb-4">User Details</h2>
+      <p className="text-gray-600 mb-2">ID: {user.id}</p>
+      <p className="text-gray-600">Email: {user.email}</p>
+    </div>
+  </div>
+</div>
+
   );
 }
 

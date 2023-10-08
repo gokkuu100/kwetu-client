@@ -14,7 +14,7 @@ const SignIn = ({ setAuthenticated, setUserRole }) => {
     const handleSignIn = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch("http://127.0.0.1:5000/login", {
+            const response = await fetch("https://housing-db-85734cb1418b.herokuapp.com/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -56,21 +56,55 @@ const SignIn = ({ setAuthenticated, setUserRole }) => {
     };
 
     return (
+<div className="min-h-screen flex">
+  {/* Left Side - Kwetu House Listings */}
+  <div className="w-1/2 bg-black text-white flex flex-col items-center justify-center p-10">
+    <h1 className="text-4xl font-extrabold mb-4">Kwetu House Listings</h1>
+    <p className="text-lg text-center mb-8">
+      Discover your dream home with our House Listing website, where unparalleled real estate opportunities await you. Whether you're searching for a cozy family home, a chic urban apartment, or a luxurious countryside estate, our platform offers an extensive range of meticulously curated properties to suit every lifestyle and budget. With user-friendly search tools and detailed property listings, finding the perfect house has never been easier. Explore diverse neighborhoods, visualize properties through immersive images, and connect with trusted real estate agents. Your new home is just a click away – start your journey towards homeownership today.
+    </p>
+  </div>
+  {/* Right Side - Sign In Form */}
+  <div className="w-1/2 flex items-center justify-center bg-gray-100">
+    <div className="bg-white p-8 rounded shadow-md w-96">
+      <h2 className="text-2xl font-semibold mb-6 text-center">Sign In</h2>
+      <form onSubmit={handleSignIn} className="space-y-4">
         <div>
-            <h2>Sign In</h2>
-            <form onSubmit={handleSignIn}>
-                <label>
-                    Email:
-                    <input type="email" name="email" value={formData.email} onChange={handleInputChange} />
-                </label>
-                <label>
-                    Password:
-                    <input type="password" name="password" value={formData.password} onChange={handleInputChange} />
-                </label>
-                <button type="submit">Sign In</button>
-            </form>
-            <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
+          <label className="block text-sm font-medium text-gray-600">Email:</label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
+            className="mt-1 p-2 w-full border rounded-md"
+            required
+          />
         </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-600">Password:</label>
+          <input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleInputChange}
+            className="mt-1 p-2 w-full border rounded-md"
+            required
+          />
+        </div>
+        <button
+          type="submit"
+          className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200"
+        >
+          Sign In
+        </button>
+      </form>
+      <p className="mt-4 text-gray-600 text-center">
+        Don't have an account? <Link to="/signup" className="text-blue-500 hover:underline">Sign Up</Link>
+      </p>
+    </div>
+  </div>
+</div>
+
     );
 };
 

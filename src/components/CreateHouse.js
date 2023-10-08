@@ -29,7 +29,7 @@ function CreateHouse() {
             return;
         }
 
-        fetch("http://127.0.0.1:5000/houses", {
+        fetch("https://housing-db-85734cb1418b.herokuapp.com/houses", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -48,93 +48,129 @@ function CreateHouse() {
     };
 
     return (
-        <div className="create-house">
-            <h2>Create a New House Listing</h2>
-            <form onSubmit={handleSubmit}>
-                {/* Your input fields */}
-                <label>Title:</label><br />
-        <input
-        type="text"
-        name="title"
-        value={houseData.title}
-        onChange={handleInputChange}
-        required
-        /><br />
-        <label>Bathrooms:</label><br />
-        <input
-        type="number"
-        name="bathrooms"
-        value={houseData.bathrooms}
-        onChange={handleInputChange}
-        required
-        /><br />
-        <label>Bedrooms:</label><br />
-        <input
-        type="number"
-        name="bedrooms"
-        value={houseData.bedrooms}
-        onChange={handleInputChange}
-        required
-        /><br />
-        <label>Area:</label><br />
-        <input
-        type="text"
-        name="city"
-        value={houseData.city}
-        onChange={handleInputChange}
-        required
-        /><br />
-        <label>County:</label><br />
-        <input
-        type="text"
-        name="county"
-        value={houseData.county}
-        onChange={handleInputChange}
-        required
-        /><br />
-        <label>Price:</label><br />
-        <input
-        type="number"
-        name="price"
-        value={houseData.price}
-        onChange={handleInputChange}
-        required
-        /><br />
-        <label>Size(sqfeet):</label><br />
-        <input
-        type="number"
-        name="size"
-        value={houseData.size}
-        onChange={handleInputChange}
-        required
-        /><br />
-        <label>Description:</label><br />
-        <input
-        type="text"
-        name="description"
-        value={houseData.description}
-        onChange={handleInputChange}
-        required
-        /><br />
-        <label>Images:</label><br />
-        <input
-        type="text"
-        name="image_paths"
-        value={houseData.image_paths}
-        onChange={handleInputChange}
-        required
-        /><br />
-        <label>Agent ID:</label><br />
-        <input
-            type="number"
-            name="agent_id"
-            value={houseData.agent_id}
-            onChange={handleInputChange}
-            required
-        /><br />
-                <button type="submit">Submit</button>
-            </form>
+        <div className="create-house bg-gray-100 min-h-screen flex items-center justify-center">
+        <div className="bg-white p-8 rounded shadow-md w-96">
+          <h2 className="text-2xl font-semibold mb-6 text-center">Create a New House Listing</h2>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-600">Title:</label>
+              <input
+                type="text"
+                name="title"
+                value={houseData.title}
+                onChange={handleInputChange}
+                className="mt-1 p-2 w-full border rounded-md"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-600">Bathrooms:</label>
+              <input
+                type="number"
+                name="bathrooms"
+                value={houseData.bathrooms}
+                onChange={handleInputChange}
+                className="mt-1 p-2 w-full border rounded-md"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-600">Bedrooms:</label>
+              <input
+                type="number"
+                name="bedrooms"
+                value={houseData.bedrooms}
+                onChange={handleInputChange}
+                className="mt-1 p-2 w-full border rounded-md"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-600">Area:</label>
+              <input
+                type="text"
+                name="city"
+                value={houseData.city}
+                onChange={handleInputChange}
+                className="mt-1 p-2 w-full border rounded-md"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-600">County:</label>
+              <input
+                type="text"
+                name="county"
+                value={houseData.county}
+                onChange={handleInputChange}
+                className="mt-1 p-2 w-full border rounded-md"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-600">Price:</label>
+              <input
+                type="number"
+                name="price"
+                value={houseData.price}
+                onChange={handleInputChange}
+                className="mt-1 p-2 w-full border rounded-md"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-600">Size(sqfeet):</label>
+              <input
+                type="number"
+                name="size"
+                value={houseData.size}
+                onChange={handleInputChange}
+                className="mt-1 p-2 w-full border rounded-md"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-600">Description:</label>
+              <input
+                type="text"
+                name="description"
+                value={houseData.description}
+                onChange={handleInputChange}
+                className="mt-1 p-2 w-full border rounded-md"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-600">Images:</label>
+              <input
+                type="text"
+                name="image_paths"
+                value={houseData.image_paths}
+                onChange={handleInputChange}
+                className="mt-1 p-2 w-full border rounded-md"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-600">Agent ID:</label>
+              <input
+                type="number"
+                name="agent_id"
+                value={houseData.agent_id}
+                onChange={handleInputChange}
+                className="mt-1 p-2 w-full border rounded-md"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200"
+            >
+              Submit
+            </button>
+          </form>
         </div>
+      </div>
     );
 }
 

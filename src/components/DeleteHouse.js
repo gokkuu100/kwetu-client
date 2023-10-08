@@ -15,7 +15,7 @@ function DeleteHouse() {
       return;
     }
 
-    fetch(`http://127.0.0.1:5000/houses/${houseId}`, {
+    fetch(`https://housing-db-85734cb1418b.herokuapp.com/houses/${houseId}`, {
       method: "DELETE",
       headers: {
         "Authorization": `Bearer ${token}`
@@ -37,18 +37,28 @@ function DeleteHouse() {
   };
 
   return (
-    <div className="delete-house">
-      <h2>Delete House</h2>
-      <form onSubmit={handleDelete}>
-        <label>House ID:</label>
-        <input
-          type="number"
-          value={houseId}
-          onChange={(e) => setHouseId(e.target.value)}
-          required
-        />
-        <button type="submit">Delete</button>
-      </form>
+    <div className="delete-house bg-gray-100 min-h-screen flex items-center justify-center">
+      <div className="bg-white p-8 rounded shadow-md w-96">
+        <h2 className="text-2xl font-semibold mb-6 text-center">Delete House</h2>
+        <form onSubmit={handleDelete} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-600">House ID:</label>
+            <input
+              type="number"
+              value={houseId}
+              onChange={(e) => setHouseId(e.target.value)}
+              className="mt-1 p-2 w-full border rounded-md"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full bg-red-500 text-white p-2 rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-200"
+          >
+            Delete
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

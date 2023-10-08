@@ -13,7 +13,7 @@ const SignUp = ({ setAuthenticated }) => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://127.0.0.1:5000/signup", {
+      const response = await fetch("https://housing-db-85734cb1418b.herokuapp.com/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -36,20 +36,41 @@ const SignUp = ({ setAuthenticated }) => {
   };
 
   return (
-    <div>
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSignUp}>
-        <label>
-          Email:
-          <input type="email" name="email" value={formData.email} onChange={handleInputChange} />
-        </label>
-        <label>
-          Password:
-          <input type="password" name="password" value={formData.password} onChange={handleInputChange} />
-        </label>
-        <button type="submit">Sign Up</button>
-      </form>
-    </div>
+<div className="min-h-screen flex items-center justify-center bg-gray-100">
+  <div className="bg-white p-8 rounded shadow-md w-96">
+    <h2 className="text-2xl font-semibold mb-6 text-center">Sign Up</h2>
+    <form onSubmit={handleSignUp} className="space-y-4">
+      <div>
+        <label className="block text-sm font-medium text-gray-600">Email:</label>
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleInputChange}
+          className="mt-1 p-2 w-full border rounded-md"
+          required
+        />
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-600">Password:</label>
+        <input
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleInputChange}
+          className="mt-1 p-2 w-full border rounded-md"
+          required
+        />
+      </div>
+      <button
+        type="submit"
+        className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200"
+      >
+        Sign Up
+      </button>
+    </form>
+  </div>
+</div>
   );
 };
 
