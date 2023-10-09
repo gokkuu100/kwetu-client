@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import SignUp from "./SignUp";
 
 const SignIn = ({ setAuthenticated, setUserRole }) => {
     const [formData, setFormData] = useState({ email: "", password: "" });
